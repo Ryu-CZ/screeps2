@@ -24,7 +24,7 @@ var roleHarvester = {
             else {
                 target = creep.pos.findClosestByPath(FIND_STRUCTURES)
                 if(target){
-                    creep.moveTo(target])
+                    creep.moveTo(target)
                 }
             }
         }
