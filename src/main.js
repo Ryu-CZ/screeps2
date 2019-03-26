@@ -36,7 +36,7 @@ module.exports.loop = function () {
             spawn.spawnCreep([WORK,CARRY,MOVE], newName,
                 {memory: {role: 'harvester'}});
         }
-        if(harvesters.length < 1) {
+        if(upgraders.length < 1) {
             var newName = 'Upgrader' + Game.time;
             console.log('Spawning new upgrader: ' + newName);
             spawn.spawnCreep([WORK,CARRY,MOVE], newName,
