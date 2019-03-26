@@ -9,7 +9,7 @@ var roleHarvester = {
             }
         }
         else {
-            var targets = creep.room.findClosestByPath(FIND_STRUCTURES, {
+            var targets = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return (structure.structureType == STRUCTURE_EXTENSION ||
                                 structure.structureType == STRUCTURE_SPAWN ||
@@ -22,7 +22,7 @@ var roleHarvester = {
                 }
             }
             else {
-                var targets = creep.room.findClosestByPath(FIND_STRUCTURES)
+                var targets = creep.pos.findClosestByPath(FIND_STRUCTURES)
                 if(targets.length > 0){
                     creep.moveTo(targets[0])
                 }
