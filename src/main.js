@@ -31,32 +31,34 @@ module.exports.loop = function () {
     // console.log('Harvesters: ' + harvesters.length);
     for(var spawn_i in Game.spawns) {
         var spawn = Game.spawns[spawn_i]
-        if(harvesters.length < 2) {
-            var newName = 'Harvester' + Game.time;
-            console.log('Spawning new harvester: ' + newName);
-            spawn.spawnCreep([WORK,CARRY,MOVE], newName,
-                {memory: {role: 'harvester'}});
-        }
-        if(upgraders.length < 2) {
-            var newName = 'Upgrader' + Game.time;
-            console.log('Spawning new upgrader: ' + newName);
-            spawn.spawnCreep([WORK,CARRY,MOVE], newName,
-                {memory: {role: 'upgrader'}});
-        }
-        if(builders.length < 2) {
-            var newName = 'Builder' + Game.time;
-            console.log('Spawning new builder: ' + newName);
-            spawn.spawnCreep([WORK,CARRY,MOVE], newName,
-                {memory: {role: 'builder'}});
-        }
+        if (spawn.room.energyAvailable > 149) {
+            if(harvesters.length < 2 ) {
+                var newName = 'Harvester' + Game.time;
+                console.log('Spawning new harvester: ' + newName);
+                spawn.spawnCreep([WORK,CARRY,MOVE], newName,
+                    {memory: {role: 'harvester'}});
+            }
+            if(upgraders.length < 2 ) {
+                var newName = 'Upgrader' + Game.time;
+                console.log('Spawning new upgrader: ' + newName);
+                spawn.spawnCreep([WORK,CARRY,MOVE], newName,
+                    {memory: {role: 'upgrader'}});
+            }
+            if(builders.length < 2 ) {
+                var newName = 'Builder' + Game.time;
+                console.log('Spawning new builder: ' + newName);
+                spawn.spawnCreep([WORK,CARRY,MOVE], newName,
+                    {memory: {role: 'builder'}});
+            }
 
-        if(spawn.spawning) {
-            var spawningCreep = Game.creeps[spawn.spawning.name];
-            spawn.room.visual.text(
-                'Spawning ' + spawningCreep.memory.role,
-                spawn.pos.x + 1,
-                spawn.pos.y,
-                {align: 'left', opacity: 0.8});
+            if(spawn.spawning) {
+                var spawningCreep = Game.creeps[spawn.spawning.name];
+                spawn.room.visual.text(
+                    'Spawning ' + spawningCreep.memory.role,
+                    spawn.pos.x + 1,
+                    spawn.pos.y,
+                    {align: 'left', opacity: 0.8});
+            }
         }
 
 
