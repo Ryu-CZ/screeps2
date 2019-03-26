@@ -14,10 +14,12 @@ var roleRepairer = {
             creep.say('building');
         }
 
+        if ( creep.room.name != creep.memory.home ) {}
+            roleUpgrader.run(creep);
+        }
+
         // behavior
         if (creep.memory.repairing) {
-            if creep.room.name != creep.memory.home:
-                roleUpgrader.run(creep);
             var structure = null
             if ( !creep.memory.toRepair ) {
                 structure = creep.pos.findClosestByPath(
