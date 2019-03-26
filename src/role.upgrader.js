@@ -4,11 +4,11 @@ var roleUpgrader = {
     run: function(creep) {
         if(creep.memory.uppgrading && creep.carry.energy == 0) {
             creep.memory.uppgrading = false;
-            creep.say('stocking energy');
+            creep.say('charging');
         }
         else if (!creep.memory.uppgrading && creep.carry.energy == creep.carryCapacity) {
             creep.memory.uppgrading = true;
-            creep.say('going uppgrading');
+            creep.say('uppgrading');
         }
 
         if(creep.memory.building) {
