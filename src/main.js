@@ -31,7 +31,8 @@ module.exports.loop = function () {
     // console.log('Harvesters: ' + harvesters.length);
     for(var spawn_i in Game.spawns) {
         var spawn = Game.spawns[spawn_i]
-        if (spawn.room.energyAvailable > 149) {
+        console.log('Energy: ' + spawn.room.energyAvailable)
+        if (spawn.room.energyAvailable > 299) {
             if(harvesters.length < 2 ) {
                 var newName = 'Harvester' + Game.time;
                 console.log('Spawning new harvester: ' + newName);
