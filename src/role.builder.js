@@ -1,3 +1,5 @@
+var roleUpgrader = require('role.upgrader');
+
 var roleBuilder = {
 
     /** @param {Creep} creep **/
@@ -27,6 +29,9 @@ var roleBuilder = {
                 else if (build_test == ERR_NOT_ENOUGH_ENERGY) {
                     creep.memory.building = false;
                 }
+            }
+            else {
+                roleUpgrader.run(creep);
             }
 	    }
 	    else {
