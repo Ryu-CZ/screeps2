@@ -13,6 +13,11 @@ var roleBuilder = {
 	    }
 
 	    if(creep.memory.building) {
+            if(creep.room.name != creep.memory.home) {
+                creep.moveTo(Game.rooms[creep.memory.home].controller);
+                return;
+            }
+
 	        var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
             if(targets.length) {
                 var build_test = creep.build(targets[0])

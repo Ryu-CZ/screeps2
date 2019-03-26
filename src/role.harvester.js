@@ -3,6 +3,12 @@ var roleHarvester = {
     /** @param {Creep} creep **/
     run: function(creep) {
 	    if( creep.memory.delivering ) {
+
+            if(creep.room.name != creep.memory.home) {
+                creep.moveTo(Game.rooms[creep.memory.home].controller);
+                return;
+            }
+
             var target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return (structure.structureType == STRUCTURE_EXTENSION ||
