@@ -16,35 +16,37 @@ var roleRepairer = {
 
         // behavior
         if (creep.memory.repairing) {
-          var structure = null
-          if ( !creep.memory.toRepair ) {
-            structure = creep.pos.findClosestByPath(
-              FIND_STRUCTURES,
-              {
-                filter: (s) => s.structureType != STRUCTURE_WALL &&
-                  s.structureType != STRUCTURE_RAMPART &&
-                  s.hits < 0.83*s.hitsMax
-              });
-          }
-          else {
-            structure = Game.getObjectById(creep.memory.toRepair)
-            if ( structure && structure.hits >= structure.hitsMax ) {
-              structure = null
-              creep.memory.toRepair = null
+            if creep.room.name != creep.memory.home:
+                roleUpgrader.run(creep);
+            var structure = null
+            if ( !creep.memory.toRepair ) {
+                structure = creep.pos.findClosestByPath(
+                    FIND_STRUCTURES,
+                  {
+                      filter: (s) => s.structureType != STRUCTURE_WALL &&
+                      s.structureType != STRUCTURE_RAMPART &&
+                      s.hits < 0.83*s.hitsMax
+                  });
+              }
+            else {
+                structure = Game.getObjectById(creep.memory.toRepair)
+                if ( structure && structure.hits >= structure.hitsMax ) {
+                  structure = null
+                  creep.memory.toRepair = null
+                }
             }
-          }
-          if ( !structure ) {
-            // switch to upgrader if there is nothing to repair
-            roleUpgrader.run(creep);
-          }
-          else {
-            // remember structure
-            creep.memory.toRepair = structure.id
-            // repair structure
-            if (creep.repair(structure) == ERR_NOT_IN_RANGE) {
-              creep.moveTo(structure, {visualizePathStyle: {stroke: '#00aaff'}});
+            if ( !structure ) {
+                // switch to upgrader if there is nothing to repair
+                roleUpgrader.run(creep);
             }
-          }
+            else {
+                // remember structure
+                creep.memory.toRepair = structure.id
+                // repair structure
+                if (creep.repair(structure) == ERR_NOT_IN_RANGE) {
+                  creep.moveTo(structure, {visualizePathStyle: {stroke: '#00aaff'}});
+                }
+            }
         }
         else {
             // gather resources
