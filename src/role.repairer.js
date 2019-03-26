@@ -5,7 +5,7 @@ var roleRepairer = {
     /** @param {Creep} creep **/
     run: function(creep) {
 
-        if(creep.memory.repairing && creep.carry.energy == 0) {
+        if(creep.carry.energy == 0) {
             creep.memory.repairing = false;
             creep.say('stocking');
         }
