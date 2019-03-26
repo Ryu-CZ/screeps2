@@ -14,8 +14,9 @@ var roleRepairer = {
             creep.say('building');
         }
 
-        if ( creep.room.name != creep.memory.home ) {}
+        if ( creep.room.name != creep.memory.home ) {
             roleUpgrader.run(creep);
+            return;
         }
 
         // behavior
