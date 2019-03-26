@@ -45,19 +45,19 @@ module.exports.loop = function () {
                 var newName = 'Upgrader' + Game.time;
                 console.log('Spawning new upgrader: ' + newName);
                 spawn.spawnCreep([WORK,CARRY,MOVE], newName,
-                    {memory: {role: 'upgrader'}});
+                    {memory: {role: 'upgrader', upgrading: false}});
             }
             if(builders.length < 2 ) {
                 var newName = 'Builder' + Game.time;
                 console.log('Spawning new builder: ' + newName);
                 spawn.spawnCreep([WORK,CARRY,MOVE], newName,
-                    {memory: {role: 'builder'}});
+                    {memory: {role: 'builder', building: false }});
             }
             if(repairers.length < 1 ) {
                 var newName = 'Repairer' + Game.time;
                 console.log('Spawning new repairer: ' + newName);
                 spawn.spawnCreep([WORK,CARRY,MOVE], newName,
-                    {memory: {role: 'repairer'}});
+                    {memory: {role: 'repairer', repairing: false}});
             }
 
             if(spawn.spawning) {
