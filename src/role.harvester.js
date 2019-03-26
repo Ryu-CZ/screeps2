@@ -12,7 +12,7 @@ var roleHarvester = {
             });
             if( target == null ) {
                 if (creep.carry.energy < creep.carryCapacity){
-                    creep.memory.delivering = False;
+                    creep.memory.delivering = false;
                 }
                 target = creep.pos.findClosestByPath(FIND_STRUCTURES)
                 if( target != null ){
@@ -20,7 +20,7 @@ var roleHarvester = {
                 }
             }
             else if ( creep.carry.energy == 0 ) {
-                creep.memory.delivering = False;
+                creep.memory.delivering = false;
             }
             else {
                 if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
@@ -30,7 +30,7 @@ var roleHarvester = {
         }
         else {
             if ( creep.carry.energy == creep.carryCapacity ){
-                creep.memory.delivering = True;
+                creep.memory.delivering = true;
             }
             var source = creep.pos.findClosestByPath(FIND_SOURCES);
             if( creep.harvest(source) == ERR_NOT_IN_RANGE ) {
