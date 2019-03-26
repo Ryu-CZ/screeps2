@@ -21,7 +21,7 @@ var roleRepairer = {
                 creep.moveTo(Game.rooms[creep.memory.home].controller);
                 return;
             }
-            
+
             var structure = null
             if ( !creep.memory.toRepair ) {
                 structure = creep.pos.findClosestByPath(
@@ -29,6 +29,7 @@ var roleRepairer = {
                   {
                       filter: (s) => s.structureType != STRUCTURE_WALL &&
                       s.structureType != STRUCTURE_RAMPART &&
+                      s.room.name == creep.room.name &&
                       s.hits < 0.83*s.hitsMax
                   });
               }
