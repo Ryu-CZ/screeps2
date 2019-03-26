@@ -42,6 +42,7 @@ var roleRepairer = {
             }
             if ( !structure ) {
                 // switch to upgrader if there is nothing to repair
+                creep.memory.toRepair = null
                 roleBuilder.run(creep);
             }
             else {

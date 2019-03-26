@@ -30,10 +30,10 @@ module.exports.loop = function () {
     var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
     var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
     var repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer');
-    // console.log('Harvesters: ' + harvesters.length);
+
     for(var spawn_i in Game.spawns) {
         var spawn = Game.spawns[spawn_i]
-        console.log('Energy: ' + spawn.room.energyAvailable)
+        // console.log('Energy: ' + spawn.room.energyAvailable)
         if (spawn.room.energyAvailable > 299) {
             if(harvesters.length < 2 ) {
                 var newName = 'Harvester' + Game.time;
