@@ -9,22 +9,22 @@ var roleHarvester = {
             }
         }
         else {
-            var targets = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+            var target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return (structure.structureType == STRUCTURE_EXTENSION ||
                                 structure.structureType == STRUCTURE_SPAWN ||
                                 structure.structureType == STRUCTURE_TOWER) &&  structure.energyCapacity - structure.energy > creep.carry.energy;
                     }
             });
-            if(targets.length > 0) {
-                if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+            if(!target) {
+                if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }
             else {
-                var targets = creep.pos.findClosestByPath(FIND_STRUCTURES)
-                if(targets.length > 0){
-                    creep.moveTo(targets[0])
+                target = creep.pos.findClosestByPath(FIND_STRUCTURES)
+                if(target){
+                    creep.moveTo(target])
                 }
             }
         }
