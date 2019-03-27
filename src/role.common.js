@@ -2,7 +2,6 @@ class Role {
     /** @param {Creep} creep **/
     constructor(creep) {
         this.creep = creep;
-        this.role = 'harvester'
     }
 
     /** create a balanced body as big as possible with the given energy
@@ -33,13 +32,26 @@ class Role {
         }
     }
 
+    /** generate new name
+     * @returns {string}
+     **/
+    next_name() {
+        return self.creep.memory.role + Game.time % 5000;
+    }
+
     /**
-     * Adding a method to the constructor
+     * Adding a method to the construct creep
      * @param {Spawn} spawn
      * @param {int} energy
      **/
     breed(spawn, energy) {
-        spawn.room.energyAvailable
-        return `${this.name} says hello.`;
+        spawn.spawnCreep(
+            this.design_body(energy),
+            this.next_name(), {
+                memory: this.init_memory()
+            }
+        );
     }
 }
+
+module.exports = Role;
