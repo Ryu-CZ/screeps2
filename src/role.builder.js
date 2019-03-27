@@ -1,4 +1,4 @@
-var roleUpgrader = require('role.upgrader');
+var roleUpgrader = require('upgrader');
 
 var roleBuilder = {
 
@@ -35,7 +35,7 @@ var roleBuilder = {
                 roleUpgrader.run(creep);
             }
         } else {
-            var source = creep.pos.findClosestByPath(FIND_SOURCES);;
+            var source = creep.pos.findClosestByPath(FIND_ACTIVE_SOURCES);;
             if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(source, {
                     visualizePathStyle: {

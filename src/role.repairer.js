@@ -23,7 +23,7 @@ var roleRepairer = {
 
             var structure = null
             if (!creep.memory.toRepair) {
-                structure = creep.pos.findClosestByPath(
+                structure = creep.pos.findClosestByRange(
                     FIND_STRUCTURES, {
                         filter: (s) => s.structureType != STRUCTURE_WALL &&
                             s.structureType != STRUCTURE_RAMPART &&
@@ -55,7 +55,7 @@ var roleRepairer = {
             }
         } else {
             // gather resources
-            var source = creep.pos.findClosestByPath(FIND_SOURCES);;
+            var source = creep.pos.findClosestByPath(FIND_ACTIVE_SOURCES);;
             if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(source);
             }

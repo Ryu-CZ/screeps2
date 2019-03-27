@@ -9,7 +9,7 @@ var roleHarvester = {
                 return;
             }
 
-            var target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+            var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (structure.structureType == STRUCTURE_EXTENSION ||
                         structure.structureType == STRUCTURE_SPAWN ||
