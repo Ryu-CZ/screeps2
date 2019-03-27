@@ -35,8 +35,9 @@ module.exports.loop = function() {
         var spawn = Game.spawns[spawn_i]
         // console.log('Energy: ' + spawn.room.energyAvailable)
         if (spawn.room.energyAvailable > 299) {
+            var idx = Game.time % 5000
             if (harvesters.length < 2) {
-                var newName = 'Harvester' + Game.time;
+                var newName = 'Harvester' + idx;
                 console.log('Spawning new harvester: ' + newName);
                 spawn.spawnCreep([WORK, CARRY, MOVE], newName, {
                     memory: {
@@ -46,7 +47,7 @@ module.exports.loop = function() {
                 });
             }
             if (upgraders.length < 2) {
-                var newName = 'Upgrader' + Game.time;
+                var newName = 'Upgrader' + idx;
                 console.log('Spawning new upgrader: ' + newName);
                 spawn.spawnCreep([WORK, CARRY, MOVE], newName, {
                     memory: {
@@ -57,7 +58,7 @@ module.exports.loop = function() {
                 });
             }
             if (builders.length < 2) {
-                var newName = 'Builder' + Game.time;
+                var newName = 'Builder' + idx;
                 console.log('Spawning new builder: ' + newName);
                 spawn.spawnCreep([WORK, CARRY, MOVE], newName, {
                     memory: {
@@ -68,7 +69,7 @@ module.exports.loop = function() {
                 });
             }
             if (repairers.length < 1) {
-                var newName = 'Repairer' + Game.time;
+                var newName = 'Repairer' + idx;
                 console.log('Spawning new repairer: ' + newName);
                 spawn.spawnCreep([WORK, CARRY, MOVE], newName, {
                     memory: {
