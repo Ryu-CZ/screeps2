@@ -46,7 +46,7 @@ module.exports.loop = function() {
                     }
                 });
             }
-            if (upgraders.length < 2) {
+            if (upgraders.length < 3) {
                 var newName = 'Upgrader' + idx;
                 console.log('Spawning new upgrader: ' + newName);
                 spawn.spawnCreep([WORK, CARRY, MOVE], newName, {
