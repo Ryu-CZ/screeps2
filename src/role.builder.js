@@ -9,7 +9,7 @@ var roleBuilder = {
             creep.memory.building = false;
             creep.say('stocking');
 	    }
-	    if(!creep.memory.building && creep.carry.energy == creep.carryCapacity) {
+	    else if(!creep.memory.building && creep.carry.energy == creep.carryCapacity) {
 	        creep.memory.building = true;
 	        creep.say('building');
 	    }
