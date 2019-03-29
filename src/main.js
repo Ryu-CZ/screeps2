@@ -23,8 +23,12 @@ module.exports.loop = function() {
 
         if (Game.time % 137 == 0) {
             let tower_ids = [];
-            for (let t in spawn.room.find(STRUCTURE_TOWER)) {
-                tower_ids.push(t.id);
+            for (let t in Game.spawns['Core1'].room.find(FIND_MY_STRUCTURES, {
+                    filter: {
+                        structureType: STRUCTURE_TOWER
+                    }
+                })) {
+                console.log(t.id);
             }
             spawn.memory.towers = tower_ids;
         }
