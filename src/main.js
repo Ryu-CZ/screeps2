@@ -18,24 +18,23 @@ module.exports.loop = function() {
     var repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer');
 
     for (let spawn_i in Game.spawns) {
-        var spawn = Game.spawns[spawn_i];
+        let spawn = Game.spawns[spawn_i];
         // console.log('Energy: ' + spawn.room.energyAvailable)
 
         if (Game.time % 137 == 0) {
-            let tower_ids = [];
+            spawn.memory.towers = []
             let towers = spawn.room.find(FIND_MY_STRUCTURES, {
                 filter: {
                     structureType: STRUCTURE_TOWER
                 }
             });
-            for (let tower in towers) {
-                console.log(tower);
-                console.log(tower.id);
+            for (let tower of towers) {
+                spawn.memory.towers.push(tower.id);
             }
-            spawn.memory.towers = tower_ids;
+            console.log('Found towers: ' + spawn.memory.towers.length)
         }
 
-        for (let t_id in spawn.memory.towers) {
+        for (let t_id of spawn.memory.towers) {
             let tower = Game.getObjectById(t_id);
             if (tower) {
                 let closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
