@@ -18,17 +18,19 @@ module.exports.loop = function() {
     var repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer');
 
     for (let spawn_i in Game.spawns) {
-        let spawn = Game.spawns[spawn_i];
+        var spawn = Game.spawns[spawn_i];
         // console.log('Energy: ' + spawn.room.energyAvailable)
 
         if (Game.time % 137 == 0) {
             let tower_ids = [];
-            for (let t in Game.spawns['Core1'].room.find(FIND_MY_STRUCTURES, {
-                    filter: {
-                        structureType: STRUCTURE_TOWER
-                    }
-                })) {
-                console.log(t.id);
+            let towers = spawn.room.find(FIND_MY_STRUCTURES, {
+                filter: {
+                    structureType: STRUCTURE_TOWER
+                }
+            });
+            for (let tower in towers) {
+                console.log(tower);
+                console.log(tower.id);
             }
             spawn.memory.towers = tower_ids;
         }
