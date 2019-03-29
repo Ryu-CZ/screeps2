@@ -35,13 +35,13 @@ module.exports.loop = function() {
                 let closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
                 if (closestHostile) {
                     tower.attack(closestHostile);
-                }
-            } else if {
-                let closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
-                    filter: (structure) => structure.hits < 0.48 * structure.hitsMax
-                });
-                if (closestDamagedStructure) {
-                    t
+                } else {
+                    let closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
+                        filter: (structure) => structure.hits < 0.48 * structure.hitsMax
+                    });
+                    if (closestDamagedStructure) {
+                        t
+                    }
                 }
             }
         }
