@@ -1,3 +1,5 @@
+require('type.spawn')();
+
 var roleHarvester = require('role.harvester');
 var roleBuilder = require('role.builder');
 var roleUpgrader = require('role.upgrader');
@@ -52,11 +54,12 @@ module.exports.loop = function() {
         }
 
         if (spawn.room.energyAvailable > 299) {
+            let curent_energy = spawn.room.energyAvailable
             var idx = Game.time % 5000
             if (harvesters.length < 2) {
                 var newName = 'Harvester' + idx;
                 console.log('Spawning new harvester: ' + newName);
-                spawn.spawnCreep([WORK, CARRY, MOVE], newName, {
+                spawn.spawnCreep(spawn.createBody(curent_energy), newName, {
                     memory: {
                         role: 'harvester',
                         home: spawn.room.name
@@ -66,7 +69,7 @@ module.exports.loop = function() {
             if (upgraders.length < 3) {
                 let newName = 'Upgrader' + idx;
                 console.log('Spawning new upgrader: ' + newName);
-                spawn.spawnCreep([WORK, CARRY, MOVE], newName, {
+                spawn.spawnCreep(spawn.createBody(curent_energy), newName, {
                     memory: {
                         role: 'upgrader',
                         upgrading: false,
@@ -77,7 +80,7 @@ module.exports.loop = function() {
             if (builders.length < 2) {
                 let newName = 'Builder' + idx;
                 console.log('Spawning new builder: ' + newName);
-                spawn.spawnCreep([WORK, CARRY, MOVE], newName, {
+                spawn.spawnCreep(spawn.createBody(curent_energy), newName, {
                     memory: {
                         role: 'builder',
                         building: false,
@@ -88,7 +91,7 @@ module.exports.loop = function() {
             if (repairers.length < 1) {
                 let newName = 'Repairer' + idx;
                 console.log('Spawning new repairer: ' + newName);
-                spawn.spawnCreep([WORK, CARRY, MOVE], newName, {
+                spawn.spawnCreep(spawn.createBody(curent_energy), newName, {
                     memory: {
                         role: 'repairer',
                         repairing: false,
