@@ -1,6 +1,13 @@
 module.exports = function() {
 
-    /** @param {int} energy **/
+    /**
+     * Genereta the strongest creep body .
+     * @type {function}
+     *
+     * @param {int} energy
+     *
+     * @return {Array<string>}
+     */
     StructureSpawn.prototype.createBody = function(
         energy) {
         energy = Math.min(energy, this.memory.commonerEnergyMax);

@@ -4,9 +4,14 @@ class Role {
         this.creep = creep;
     }
 
-    /** create a balanced body as big as possible with the given energy
+    /**
+     * Create a balanced body as big as possible with the given energy
+     *
+     * @type {function}
+     *
      * @param {int} energy
-     * @returns {Array}
+     *
+     * @returns {Array<string>}
      **/
     design_body(energy) {
         var partsCnt = Math.floor(energy / 200);
