@@ -16,8 +16,6 @@ module.exports = function() {
         let body = [];
         for (let i = 0; i < partsCnt; i++) {
             body.push(WORK);
-        }
-        for (let i = 0; i < partsCnt; i++) {
             body.push(CARRY);
         }
         for (let i = 0; i < partsCnt; i++) {
