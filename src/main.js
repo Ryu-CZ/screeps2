@@ -66,7 +66,7 @@ module.exports.loop = function() {
                 });
             }
             if (curent_energy >= Math.min(600, spawn.room.energyCapacityAvailable)) {
-                if (upgraders.length < 3) {
+                if (upgraders.length < 2) {
                     let newName = 'Upgrader' + idx;
                     console.log('Spawning new upgrader: ' + newName);
                     spawn.spawnCreep(spawn.createBody(curent_energy), newName, {
