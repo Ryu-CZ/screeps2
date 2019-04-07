@@ -52,10 +52,9 @@ module.exports.loop = function() {
                 }
             }
         }
-
-        if (spawn.room.energyAvailable > 299) {
-            let curent_energy = spawn.room.energyAvailable
-            var idx = Game.time % 5000
+        let curent_energy = spawn.room.energyAvailable
+        if (curent_energy > 199) {
+            let idx = Game.time % 5000
             if (harvesters.length < 2) {
                 var newName = 'Harvester' + idx;
                 console.log('Spawning new harvester: ' + newName);
@@ -66,38 +65,40 @@ module.exports.loop = function() {
                     }
                 });
             }
-            if (upgraders.length < 3) {
-                let newName = 'Upgrader' + idx;
-                console.log('Spawning new upgrader: ' + newName);
-                spawn.spawnCreep(spawn.createBody(curent_energy), newName, {
-                    memory: {
-                        role: 'upgrader',
-                        upgrading: false,
-                        home: spawn.room.name
-                    }
-                });
-            }
-            if (builders.length < 2) {
-                let newName = 'Builder' + idx;
-                console.log('Spawning new builder: ' + newName);
-                spawn.spawnCreep(spawn.createBody(curent_energy), newName, {
-                    memory: {
-                        role: 'builder',
-                        building: false,
-                        home: spawn.room.name
-                    }
-                });
-            }
-            if (repairers.length < 1) {
-                let newName = 'Repairer' + idx;
-                console.log('Spawning new repairer: ' + newName);
-                spawn.spawnCreep(spawn.createBody(curent_energy), newName, {
-                    memory: {
-                        role: 'repairer',
-                        repairing: false,
-                        home: spawn.room.name
-                    }
-                });
+            if (curent_energy >= Math.min(600, spawn.room.energyCapacityAvailable)) {
+                if (upgraders.length < 3) {
+                    let newName = 'Upgrader' + idx;
+                    console.log('Spawning new upgrader: ' + newName);
+                    spawn.spawnCreep(spawn.createBody(curent_energy), newName, {
+                        memory: {
+                            role: 'upgrader',
+                            upgrading: false,
+                            home: spawn.room.name
+                        }
+                    });
+                }
+                if (builders.length < 2) {
+                    let newName = 'Builder' + idx;
+                    console.log('Spawning new builder: ' + newName);
+                    spawn.spawnCreep(spawn.createBody(curent_energy), newName, {
+                        memory: {
+                            role: 'builder',
+                            building: false,
+                            home: spawn.room.name
+                        }
+                    });
+                }
+                if (repairers.length < 1) {
+                    let newName = 'Repairer' + idx;
+                    console.log('Spawning new repairer: ' + newName);
+                    spawn.spawnCreep(spawn.createBody(curent_energy), newName, {
+                        memory: {
+                            role: 'repairer',
+                            repairing: false,
+                            home: spawn.room.name
+                        }
+                    });
+                }
             }
 
             if (spawn.spawning) {
