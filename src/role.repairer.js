@@ -1,6 +1,6 @@
 var roleBuilder = require('role.builder');
 
-var roleRepairer = {
+module.exports = {
 
     /** @param {Creep} creep **/
     do_job: function(creep) {
@@ -65,5 +65,3 @@ var roleRepairer = {
         }
     }
 };
-
-module.exports = roleRepairer;

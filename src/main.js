@@ -12,7 +12,7 @@ let roleJobs = {
     'carry': require('role.carry'),
     'wall': require('role.wall'),
     'harvester': require('role.supply'),
-    'claim': require('role.claim')
+    'claim': require('role.claim'),
 }
 
 module.exports.loop = function() {
