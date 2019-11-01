@@ -1,13 +1,10 @@
-var roleUpgrader = {
-
+module.exports = {
     /** @param {Creep} creep **/
-    run: function(creep) {
+    do_job: function(creep) {
         if (creep.carry.energy == 0 && creep.memory.upgrading) {
             creep.memory.upgrading = false;
-            creep.say('charging');
         } else if (!creep.memory.upgrading && creep.carry.energy == creep.carryCapacity) {
             creep.memory.upgrading = true;
-            creep.say('upgrading');
         }
 
         if (creep.memory.upgrading) {
@@ -15,16 +12,7 @@ var roleUpgrader = {
                 creep.moveTo(Game.rooms[creep.memory.home].controller);
             }
         } else {
-            var source = creep.pos.findClosestByPath(FIND_SOURCES_ACTIVE);
-            if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(source, {
-                    visualizePathStyle: {
-                        stroke: '#ffaa00'
-                    }
-                });
-            }
+            creep.getEnergy();
         }
     }
 };
-
-module.exports = roleUpgrader;

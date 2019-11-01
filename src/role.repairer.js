@@ -3,7 +3,7 @@ var roleBuilder = require('role.builder');
 var roleRepairer = {
 
     /** @param {Creep} creep **/
-    run: function(creep) {
+    do_job: function(creep) {
 
         if (creep.carry.energy == 0 && creep.memory.repairing) {
             creep.memory.repairing = false;
@@ -21,7 +21,7 @@ var roleRepairer = {
                 return;
             }
 
-            var structure = null
+            let structure = null
             if (!creep.memory.toRepair) {
                 structure = creep.pos.findClosestByRange(
                     FIND_STRUCTURES, {
@@ -40,7 +40,13 @@ var roleRepairer = {
             if (!structure) {
                 // switch to upgrader if there is nothing to repair
                 creep.memory.toRepair = null
-                roleBuilder.run(creep);
+                if (!creep.room.controller.sign) {
+                    if (creep.signController(creep.room.controller, "My ancestors are smiling at me. Can you say the same? 🐲") == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(creep.room.controller);
+                    }
+                    return
+                }
+                roleBuilder.do_job(creep);
             } else {
                 // remember structure
                 creep.memory.toRepair = structure.id
@@ -55,10 +61,7 @@ var roleRepairer = {
             }
         } else {
             // gather resources
-            var source = creep.pos.findClosestByPath(FIND_SOURCES_ACTIVE);;
-            if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(source);
-            }
+            creep.getEnergy();
         }
     }
 };

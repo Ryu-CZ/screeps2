@@ -1,14 +1,14 @@
 var roleUpgrader = require('role.upgrader');
 
-var roleBuilder = {
+module.exports = {
 
     /** @param {Creep} creep **/
-    run: function(creep) {
+    do_job: function(creep) {
 
-        if (creep.carry.energy == 0 && creep.memory.building) {
+        if (creep.energy == 0 && creep.memory.building) {
             creep.memory.building = false;
             creep.say('stocking');
-        } else if (!creep.memory.building && creep.carry.energy == creep.carryCapacity) {
+        } else if (!creep.memory.building && creep.energy == creep.carryCapacity) {
             creep.memory.building = true;
             creep.say('building');
         }
@@ -18,33 +18,37 @@ var roleBuilder = {
                 creep.moveTo(Game.rooms[creep.memory.home].controller);
                 return;
             }
-
-            var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
-            if (targets.length) {
-                var build_test = creep.build(targets[0])
+            let target = null;
+            if (creep.memory.contruction_site_id) {
+                target = Game.getObjectById(creep.memory.contruction_site_id);
+            }
+            if (!target) {
+                target = creep.pos.findClosestByRange(FIND_MY_CONSTRUCTION_SITES);
+            }
+            if (target) {
+                // console.log(creep.name + ' building ' + target);
+                const build_test = creep.build(target)
+                creep.memory.contruction_site_id = target.id
                 if (build_test == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0], {
-                        visualizePathStyle: {
-                            stroke: '#ffffff'
-                        }
-                    });
+                    creep.moveTo(target);
                 } else if (build_test == ERR_NOT_ENOUGH_ENERGY) {
                     creep.memory.building = false;
                 }
             } else {
-                roleUpgrader.run(creep);
+                roleUpgrader.do_job(creep);
             }
         } else {
-            var source = creep.pos.findClosestByPath(FIND_SOURCES_ACTIVE);;
-            if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(source, {
-                    visualizePathStyle: {
-                        stroke: '#ffaa00'
-                    }
+            const free_meal = creep.pos.findClosestByPath(
+                FIND_DROPPED_RESOURCES, {
+                    filter: r => r.amount >= 0.62 * creep.carryCapacity
                 });
+            if (free_meal) {
+                if (creep.pickup(free_meal) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(free_meal);
+                }
+            } else {
+                creep.getEnergy()
             }
         }
     }
 };
-
-module.exports = roleBuilder;
